@@ -100,3 +100,42 @@ class LinkedList:
             message = LinkedList.NODE_NOT_FOUND.format(value_to_delete,"delete_node_by_value")
             print(message)
             return message 
+
+    def delete_node_by_position(self, position_to_delete):
+        if self.is_empty():
+            message = LinkedList.DELETE_FROM_EMPTY_LINKED_LIST_MSG
+            print(message)
+            return message
+        current_node = self.head
+        prev = None
+        count = 0
+        
+        # Check if the node to delete is the head node
+        if position_to_delete == count:
+            self.head = current_node.next
+            current_node = None
+            return
+
+        while current_node and count != position_to_delete:
+            count += 1
+            current_node = current_node.next
+        
+        if current_node is self.tail:
+            # Update self.tail to the previous node
+            self.tail = prev
+            prev.next = current_node.next
+            current_node = None
+            return
+        # If current_node exists, it means the value_to_delete node exits within linked list
+        elif current_node:
+            # Update the prev.next to point to current_node.next and remove current_node form linked list
+            prev.next = current_node.next
+            current_node = None
+            return
+        # If current_node does not exists it means value_to_delete was not found in the linked list
+        else:
+            message = LinkedList.NODE_NOT_FOUND.format(position_to_delete,"delete_node_by_position")
+            print(message)
+            return message
+
+    
