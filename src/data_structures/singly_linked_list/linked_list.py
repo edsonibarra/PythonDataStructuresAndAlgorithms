@@ -54,6 +54,10 @@ class LinkedList:
         return self.head is None
 
     def delete_node_by_value(self, value_to_delete):
+        """
+        Delete a node based on the value provided in
+        value_to_delete argument
+        """
         if self.is_empty():
             message = LinkedList.DELETE_FROM_EMPTY_LINKED_LIST_MSG
             print(message)
