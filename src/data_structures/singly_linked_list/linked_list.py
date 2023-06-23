@@ -72,14 +72,18 @@ class LinkedList:
             current_node = None
             return
         
+        # Traverse Linked list until node containing value_to_delete is found
         while current_node and current_node.data != value_to_delete:
             prev = current_node
             current_node = current_node.next
         
+        # If current_node exists, it means the value_to_delete node exits within linked list
         if current_node:
+            # Update the prev.next to point to current_node.next and remove current_node form linked list
             prev.next = current_node.next
             current_node = None
             return
+        # If current_node does not exists it means value_to_delete was not found in the linked list
         else:
             message = LinkedList.NODE_NOT_FOUND.format(value_to_delete,"delete_node_by_value")
             print(message)
