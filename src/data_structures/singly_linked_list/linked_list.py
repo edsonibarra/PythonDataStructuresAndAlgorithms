@@ -102,9 +102,10 @@ class LinkedList:
             return message
         current_node = self.head
         prev = None
-        count = 0
+        count = 0  # Keep track of the current position
 
         # Check if the node to delete is the head node
+        # Delete node at position 0 when count is still 0.
         if position_to_delete == count:
             self.head = current_node.next
             current_node = None
