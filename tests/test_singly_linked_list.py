@@ -32,3 +32,11 @@ def test_linked_list_insertion_append():
     assert linked_list.head.data == 1
     linked_list.append(2)
     assert linked_list.head.next.data == 2
+
+
+def test_linked_list_length(empty_linked_list, populated_linked_list):
+    empty_ll = empty_linked_list
+    pop_ll = populated_linked_list
+
+    assert len(empty_ll) == 0
+    assert len(pop_ll) == 4

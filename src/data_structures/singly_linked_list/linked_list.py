@@ -128,3 +128,55 @@ class LinkedList:
             )
             print(message)
             return message
+
+    def __len__(self):
+        """
+        Returns the length of the linked list
+        """
+        count = 0
+        if self.is_empty():
+            return count
+
+        # Traverse the linked list and increase count with every node
+        current_node = self.head
+        while current_node:
+            count += 1
+            current_node = current_node.next
+        return count
+
+    def reverse(self):
+        """
+        Transform the linked list into a reversed linked list
+        Example:
+        [1] -> [2] -> [3] -> None
+        Result:
+        [3] -> [2] -> [1] -> None
+        """
+        if self.is_empty():
+            message = LinkedList.EMPTY_LINKED_LIST_MSG
+            print(message)
+            return message
+        current_node = self.head
+        prev = None
+        while current_node:
+            next_node = current_node.next
+            current_node.next = prev
+            prev = current_node
+            current_node = next_node
+        self.head = prev
+
+    def remove_duplicates(self):
+        """
+        It deletes every duplicate node data in the linked list leaving just one node of each value
+        """
+        duplicate_values = {}
+        current_node = self.head
+        prev = None
+        while current_node:
+            if current_node.data in duplicate_values:
+                prev.next = current_node.next
+                current_node = None
+            else:
+                prev = current_node
+                duplicate_values[current_node.data] = True
+            current_node = prev.next
