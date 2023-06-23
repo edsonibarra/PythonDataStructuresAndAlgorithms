@@ -93,6 +93,9 @@ class LinkedList:
             return message
 
     def delete_node_by_position(self, position_to_delete):
+        """
+        Deletes a node based on the position provided in position_to_delete
+        """
         if self.is_empty():
             message = LinkedList.DELETE_FROM_EMPTY_LINKED_LIST_MSG
             print(message)
