@@ -3,6 +3,8 @@ from node import Node
 
 class LinkedList:
     EMPTY_LINKED_LIST_MSG = "Linked List is Empty"
+    DELETE_FROM_EMPTY_LINKED_LIST_MSG = "Could not delete from empty linked list"
+    NODE_NOT_FOUND = "Node with data = {} not found in {}"
     def __init__(self):
         self.head = None
 
@@ -26,7 +28,7 @@ class LinkedList:
         print("\n------ PRINTING LINKED LIST ------")
         if self.is_empty():
             print(LinkedList.EMPTY_LINKED_LIST_MSG)
-            return
+            return LinkedList.EMPTY_LINKED_LIST_MSG
         current_node = self.head
         while current_node:
             print(f"[{current_node.data}]", end='->')
@@ -51,25 +53,27 @@ class LinkedList:
         """
         return self.head is None
 
+    def delete_node_by_value(self, value_to_delete):
+        if self.is_empty():
+            message = LinkedList.DELETE_FROM_EMPTY_LINKED_LIST_MSG
+            print(message)
+            return message
 
-def main():
-    ll = LinkedList()
-    ll.print_list()
-
-    # Insert nodes at the end of the linked list using append method
-    values_to_add = [n for n in range(1, 7)]
-    for value in values_to_add:
-        ll.append(value)
-    
-    ll.print_list()
-
-    # Insert nodes at the beginning of the linked list
-    negative_values_to_add = [n * -1 for n in range(4)]
-    for value in negative_values_to_add:
-        ll.prepend(value)
-    
-    ll.print_list()
-
-
-if __name__ == "__main__":
-    main()
+        current_node = self.head
+        prev = None  # Previous Node
+        if current_node.data == value_to_delete:
+            self.head = current_node.next
+            current_node = None
+            return
+        while current_node and current_node.data != value_to_delete:
+            prev = current_node
+            current_node = current_node.next
+        
+        if current_node:
+            prev.next = current_node.next
+            current_node = None
+            return
+        else:
+            message = LinkedList.NODE_NOT_FOUND.format(value_to_delete,"delete_node_by_value")
+            print(message)
+            return message 
