@@ -65,10 +65,13 @@ class LinkedList:
 
         current_node = self.head
         prev = None  # Previous Node
+        # Check if the head node is the one to remove from linked list
         if current_node.data == value_to_delete:
+            # If it is, update the head node to current_node.next and exit
             self.head = current_node.next
             current_node = None
             return
+        
         while current_node and current_node.data != value_to_delete:
             prev = current_node
             current_node = current_node.next
