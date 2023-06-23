@@ -1,4 +1,4 @@
-from node import Node
+from .node import Node
 
 
 class LinkedList:
@@ -7,6 +7,7 @@ class LinkedList:
     NODE_NOT_FOUND = "Node with data = {} not found in {}"
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def append(self, data):
         """
@@ -15,11 +16,13 @@ class LinkedList:
         new_node = Node(data)
         if self.is_empty():
             self.head = new_node
+            self.tail = new_node
             return
         current_node = self.head
         while current_node.next:
             current_node = current_node.next
         current_node.next = new_node
+        self.tail = new_node
     
     def print_list(self):
         """
@@ -42,6 +45,7 @@ class LinkedList:
         new_node = Node(data)
         if self.is_empty():
             self.head = new_node
+            self.tail = new_node
             return
         current_node = self.head
         new_node.next = current_node
@@ -77,8 +81,16 @@ class LinkedList:
             prev = current_node
             current_node = current_node.next
         
+        
+        # Check if the node to remove from linked list is the tail node
+        if current_node is self.tail:
+            # Update self.tail to the previous node
+            self.tail = prev
+            prev.next = current_node.next
+            current_node = None
+            return
         # If current_node exists, it means the value_to_delete node exits within linked list
-        if current_node:
+        elif current_node:
             # Update the prev.next to point to current_node.next and remove current_node form linked list
             prev.next = current_node.next
             current_node = None
